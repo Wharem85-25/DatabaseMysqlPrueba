@@ -1,0 +1,35 @@
+{
+  "name": "pruebabasededatos",
+  "version": "1.0.0",
+  "description": "Prueba de trabajo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Javascript",
+    "NodeJs",
+    "Express"
+  ],
+  "author": "Wilmer Monterrozo",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "sequelize-cli": "^6.4.1"
+  },
+  "dependencies": {
+    "@hapi/boom": "^9.1.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "faker": "^6.6.6",
+    "joi": "^17.6.0",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.19.0"
+  }
+}
