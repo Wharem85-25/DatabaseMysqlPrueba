@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const id = Joi.string().uuid();
 const nombre = Joi.string();
-const tasa_interes = Joi.number().double();
+const tasa_interes = Joi.number().precision(2);
 const maneja_cheques = Joi.string();
 
 const createProductoSchema = Joi.object({
@@ -22,3 +22,4 @@ const getProductoSchema = Joi.object({
 });
 
 module.exports = { createProductoSchema, updateProductoSchema, getProductoSchema };
+

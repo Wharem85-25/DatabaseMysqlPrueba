@@ -1,12 +1,13 @@
 const { models } = require('./../libs/sequelize');
-
+const boom = require('@hapi/boom')
 // const getConnection = require('../libs/postgres');
 
-class UsersService {
+class ChequeraService {
   constructor() {}
 
   async create(data) {
-    return data;
+    const newChequera = await models.Chequera.create(data);
+    return newChequera;
   }
 
   async find() {
@@ -15,19 +16,24 @@ class UsersService {
   }
 
   async findOne(id) {
-    return { id };
+    const chequera = await models.Chequera.findByPk(id);
+    if(!chequera) {
+      throw boom.notFount('chequera not found');
+    }
+    return chequera;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    }
+    const chequera = await this.findOne(id);
+    const rta = await chequera.update(changes);
+    return rta;
   }
 
   async delete(id) {
+    const chequera = await this.findOne(id);
+    await chequera.destroy();
     return { id };
   }
 }
 
-module.exports = UsersService;
+module.exports = ChequeraService;

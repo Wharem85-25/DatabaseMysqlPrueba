@@ -24,6 +24,11 @@ const ClienteSchema = {
     allowNull: false,
     type: DataTypes.DOUBLE,
   },
+  dpi: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

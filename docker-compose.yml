@@ -1,13 +1,26 @@
 version: '3.3'
 
 services:
-  postgres:
-    image: postgres:13
+  # postgres:
+  #   image: postgres:13
+  #   environment:
+  #     - POSTGRES_DB=banco
+  #     - POSTGRES_USER=user
+  #     - POSTGRES_PASSWORD=admin123
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./postgress_data:/var/lib/postgresql1/data
+
+  mysql:
+    image: mysql:5
     environment:
-      - POSTGRES_DB=banco
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=admin123
+      - MYSQL_DATABASE=banco
+      - MYSQL_USER=banco
+      - MYSQL_PASSWORD=admin123
+      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_PORT=3306
     ports:
-      - 5432:5432
+      - 3306:3306
     volumes:
-      - ./postgress_data:/var/lib/postgresql1/data
+      - ./mysql_data:/var/lib/mysql

@@ -1,28 +1,28 @@
 const express = require('express');
-const TransaccionService = require('../services/transacciones.service');
+const CodigoTransaccion = require('../services/codigoTransaccion.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const { createTransaccionSchema, updateTransaccionSchema, getTransaccionSchema } = require('../schema/transacciones.schema');
+const { createCodigoTransaccionSchema, updateCodigoTransaccionSchema, getCodigoTransaccionSchema } = require('../schema/codigoTransaccion.schema');
 
 const router = express.Router();
-const service = new TransaccionService();
+const service = new CodigoTransaccion();
 
 router.get('/', async (req, res, next) => {
   try {
-    const transacciones = await service.find();
-    res.json(transacciones);
+    const codigoTrans = await service.find();
+    res.json(codigoTrans);
   } catch (error) {
     next(error);
   }
 });
 
 router.get('/:id',
-  validatorHandler(getTransaccionSchema, 'params'),
-  validatorHandler(updateTransaccionSchema, 'body'),
+  validatorHandler(getCodigoTransaccionSchema, 'params'),
+  validatorHandler(updateCodigoTransaccionSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
-    const transacciones = await service.findOne(id);
-    res.json(transacciones);
+    const codigoTrans = await service.findOne(id);
+    res.json(codigoTrans);
   } catch (error) {
     next(error);
   }
@@ -30,19 +30,19 @@ router.get('/:id',
 
 
 router.post('/',
-  validatorHandler(createTransaccionSchema, 'body'),
+  validatorHandler(createCodigoTransaccionSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
-      const newTransaccion = await service.create(body);
-      res.status(201).json(newTransaccion);
+      const newCodigoTrans = await service.create(body);
+      res.status(201).json(newCodigoTrans);
     } catch (error) {
       next(error);
     }
   });
 
 router.patch('/:id',
-  validatorHandler(getTransaccionSchema, 'params'),
+  validatorHandler(getCodigoTransaccionSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -54,7 +54,7 @@ router.patch('/:id',
   })
 
 router.delete('/:id',
-  validatorHandler(getTransaccionSchema, 'params'),
+  validatorHandler(getCodigoTransaccionSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const id = Joi.string().uuid();
 const cuenta = Joi.string();
-const monto = Joi.number().double();
+const monto = Joi.number().precision(2);
 const codigo_transaccion = Joi.number().integer();
 const fecha = Joi.date();
 const no_cheque = Joi.number().integer();

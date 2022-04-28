@@ -1,12 +1,12 @@
 const { models } = require('./../libs/sequelize');
+const boom = require('@hapi/boom');
 
-// const getConnection = require('../libs/postgres');
-
-class UsersService {
+class TransaccionService {
   constructor() {}
 
   async create(data) {
-    return data;
+    const newTrans = await models.Transaccion.create(data);
+    return newTrans;
   }
 
   async find() {
@@ -15,19 +15,24 @@ class UsersService {
   }
 
   async findOne(id) {
-    return { id };
+    const trans = await this.findByPk(id);
+    if(!trans) {
+      throw boom.notFound('transaccion not found');
+    }
+    return trans;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    }
+    const trans = await this.findOne(id);
+    const rta = await trans.updtate(changes);
+    return rta;
   }
 
   async delete(id) {
+    const trans = await this.findOne(id);
+    await trans.destroy();
     return { id };
   }
 }
 
-module.exports = UsersService;
+module.exports = TransaccionService;

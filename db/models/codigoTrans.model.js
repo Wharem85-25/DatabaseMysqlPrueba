@@ -1,34 +1,30 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const PRODUCTO_TABLE = 'producto';
+const CODIGO_TRANSACCION_TABLE = 'codigoTransaccion';
 
-const ProductoSchema = {
+const CodigoTransSchema = {
   id: {
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
   },
-  nombre: {
+  codigo_transaccion: {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  tasa_interes: {
-    allowNull: false,
-    type: DataTypes.DOUBLE,
-  },
-  maneja_datos: {
+  descripcion: {
     allowNull: false,
     type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'create_at',
+    field: 'created_at',
     defaultValue: Sequelize.NOW,
   }
-}
+};
 
-class Producto extends Model {
+class CodigoTransaccion extends Model {
   static associate() {
 
   }
@@ -36,11 +32,11 @@ class Producto extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: PRODUCTO_TABLE,
-      modelName: 'Producto',
+      tableName: CODIGO_TRANSACCION_TABLE,
+      modelName: 'CodigoTransaccion',
       timeStamps: false,
     }
   }
 }
 
-module.exports = { PRODUCTO_TABLE, ProductoSchema, Producto };
+module.exports = { CODIGO_TRANSACCION_TABLE, CodigoTransSchema, CodigoTransaccion }

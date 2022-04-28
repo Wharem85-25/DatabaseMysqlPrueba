@@ -20,6 +20,10 @@ const ChequeraSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  cuenta: {
+    allowNull: false,
+    type: DataTypes.STRING
+  },
   createAt: {
     allowNull: false,
     type: DataTypes.DATE,
