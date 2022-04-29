@@ -1,17 +1,20 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
-// const getConnection = require('../libs/postgres');
 
 class ProductoService {
   constructor() {}
 
   async create(data) {
-    const newProducto = await models.Producto.create(data);
+    const newProducto = await models.Producto.create(data, {
+      include: ['moneda']
+    });
     return newProducto
   }
 
   async find() {
-    const rta = await models.Producto.findAll();
+    const rta = await models.Producto.findAll({
+      include: ['moneda']
+    });
     return rta;
   }
 

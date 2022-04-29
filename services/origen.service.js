@@ -1,33 +1,38 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
 
-class OrderService {
+class OrigenService {
+  constructor() {}
 
-  constructor(){
-  }
   async create(data) {
-    return data;
+    const newOrigen = await models.Origen.create(data);
+    return newOrigen;
   }
 
   async find() {
-    return [];
+    const rta = await models.Origen.findAll();
+    return rta;
   }
 
   async findOne(id) {
-    return { id };
+    const origen = await this.findByPk(id);
+    if(!origen) {
+      throw boom.notFound('Origen not found');
+    }
+    return origen;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    };
+    const origen = await this.findOne(id);
+    const rta = await origen.updtate(changes);
+    return rta;
   }
 
   async delete(id) {
+    const origen = await this.findOne(id);
+    await origen.destroy();
     return { id };
   }
-
 }
 
-module.exports = OrderService;
+module.exports = OrigenService;

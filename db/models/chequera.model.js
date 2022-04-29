@@ -1,5 +1,9 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
+const { CLIENTE_TABLE } = require('./cliente.model');
+const { ESTATUS_CHEQUES_TABLE } = require('./estatusCheques.model')
+const { CUENTA_TABLE } = require('./cuenta.model')
+
 const CHEQUERA_TABLE = 'chequera';
 
 const ChequeraSchema = {
@@ -20,21 +24,66 @@ const ChequeraSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  cuenta: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
   createAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW,
+  },
+  clienteId: {
+    field: 'cliente_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+    references: {
+      model:  CLIENTE_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
+  },
+  estatusChequesId: {
+    field: 'estatus_cheques_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+    references: {
+      model: ESTATUS_CHEQUES_TABLE,
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
+  },
+  cuentaId: {
+    field: 'cuenta_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+    references: {
+      model: CUENTA_TABLE,
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
   }
 }
 
 class Chequera extends Model {
-  static associate() {
-
+  static associate(models) {
+    this.belongsTo(models.Cliente, {
+      as: 'cliente',
+    })
+    this.belongsTo(models.Cuenta, {
+      as: 'cuenta',
+    })
+    this.hasMany(models.ChequesProducto, {
+      as: 'chequesProducto',
+      foreignKey: 'chequeraId'
+    });
+    console.log('hola')
+    this.belongsTo(models.EstatusCheques, {
+      as: 'estatusCheques'
+    })
   }
 
   static config(sequelize) {
@@ -42,7 +91,7 @@ class Chequera extends Model {
       sequelize,
       tableName: CHEQUERA_TABLE,
       modelName: 'Chequera',
-      timeStamps: false,
+      timestamps: false,
     }
   }
 }

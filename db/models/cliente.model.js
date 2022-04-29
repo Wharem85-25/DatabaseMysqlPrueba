@@ -1,5 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
+const { NACIONALIDAD_TABLE } = require('./nacionalidad.model')
+
 const CLIENTE_TABLE = 'cliente';
 
 const ClienteSchema = {
@@ -34,12 +36,34 @@ const ClienteSchema = {
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW,
+  },
+  nacionalidadId: {
+    field: 'nacionalidad_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+    references: {
+      model: NACIONALIDAD_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
   }
 }
 
 class Cliente extends Model {
-  static associate() {
-
+  static associate(models) {
+    this.belongsTo(models.Nacionalidad, {
+      as: 'nacionalidad'
+    }),
+    this.hasMany(models.Cuenta, {
+      as: 'cuenta',
+      foreignKey: 'clienteId'
+    });
+    this.hasMany(models.Chequera, {
+      as: 'chequera',
+      foreignKey: 'clienteId'
+    });
   }
 
   static config(sequelize) {
@@ -47,7 +71,7 @@ class Cliente extends Model {
       sequelize,
       tableName: CLIENTE_TABLE,
       modelName: 'Cliente',
-      timeStamps: false,
+      timestamps: false,
     }
   }
 }

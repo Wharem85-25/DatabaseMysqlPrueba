@@ -1,6 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const CODIGO_TRANSACCION_TABLE = 'codigoTransaccion';
+const { TIPO_TRANSACCION_TABLE } = require('./tipoTransaccion.model')
+
+const CODIGO_TRANSACCION_TABLE = 'codigo_transaccion';
 
 const CodigoTransSchema = {
   id: {
@@ -21,20 +23,38 @@ const CodigoTransSchema = {
     type: DataTypes.DATE,
     field: 'created_at',
     defaultValue: Sequelize.NOW,
+  },
+  tipoTransaccionId: {
+    field: 'tipo_transaccion_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+    references: {
+      model: TIPO_TRANSACCION_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
   }
 };
 
 class CodigoTransaccion extends Model {
-  static associate() {
-
+  static associate(models) {
+    this.hasOne(models.Transaccion, {
+      as: 'transaccion',
+      foreignKey: 'codigoTransId'
+    })
+    this.belongsTo(models.TipoTransaccion, {
+      as: 'tipoTransaccion',
+    })
   }
 
   static config(sequelize) {
     return {
       sequelize,
       tableName: CODIGO_TRANSACCION_TABLE,
-      modelName: 'CodigoTransaccion',
-      timeStamps: false,
+      modelName: 'Codigo_transaccion',
+      timestamps: false,
     }
   }
 }

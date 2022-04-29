@@ -1,17 +1,20 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
-// const getConnection = require('../libs/postgres');
 
 class ClienteService {
   constructor() {}
 
   async create(data) {
-    const newCliente = await models.Cliente.create(data);
+    const newCliente = await models.Cliente.create(data, {
+      include: ['nacionalidad']
+    });
     return newCliente;
   }
 
   async find() {
-    const rta = await models.Cliente.findAll();
+    const rta = await models.Cliente.findAll({
+      include: ['nacionalidad']
+    });
     return rta;
   }
 

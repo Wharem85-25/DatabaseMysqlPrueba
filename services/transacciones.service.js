@@ -5,12 +5,16 @@ class TransaccionService {
   constructor() {}
 
   async create(data) {
-    const newTrans = await models.Transaccion.create(data);
+    const newTrans = await models.Transaccion.create(data, {
+      include: ['codigoTransaccion']
+    });
     return newTrans;
   }
 
   async find() {
-    const rta = await models.Transaccion.findAll();
+    const rta = await models.Transaccion.findAll({
+      include: ['codigo_transaccion', 'origen', 'tipo_transaccion']
+    });
     return rta;
   }
 

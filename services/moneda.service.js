@@ -1,33 +1,38 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
 
-class OrderService {
+class MonedaService {
+  constructor() {}
 
-  constructor(){
-  }
   async create(data) {
-    return data;
+    const newMoneda = await models.Moneda.create(data);
+    return newMoneda;
   }
 
   async find() {
-    return [];
+    const rta = await models.Moneda.findAll();
+    return rta;
   }
 
   async findOne(id) {
-    return { id };
+    const moneda = await this.findByPk(id);
+    if(!moneda) {
+      throw boom.notFound('Moneda not found');
+    }
+    return moneda;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    };
+    const moneda = await this.findOne(id);
+    const rta = await moneda.updtate(changes);
+    return rta;
   }
 
   async delete(id) {
+    const moneda = await this.findOne(id);
+    await moneda.destroy();
     return { id };
   }
-
 }
 
-module.exports = OrderService;
+module.exports = MonedaService;

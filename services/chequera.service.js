@@ -1,17 +1,20 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom')
-// const getConnection = require('../libs/postgres');
 
 class ChequeraService {
   constructor() {}
 
   async create(data) {
-    const newChequera = await models.Chequera.create(data);
+    const newChequera = await models.Chequera.create(data, {
+      include: ['estatus_cheques']
+    });
     return newChequera;
   }
 
   async find() {
-    const rta = await models.Chequera.findAll();
+    const rta = await models.Chequera.findAll({
+      include: ['estatus_cheques']
+    });
     return rta;
   }
 

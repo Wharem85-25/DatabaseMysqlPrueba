@@ -1,23 +1,23 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
 
-class TipoTipoTransaccionService {
+class TipoChequeraService {
   constructor() {}
 
   async create(data) {
-    const newTipo = await models.TipoTransaccion.create(data);
+    const newTipo = await models.TipoChequera.create(data);
     return newTipo;
   }
 
   async find() {
-    const rta = await models.TipoTransaccion.findAll();
+    const rta = await models.TipoChequera.findAll();
     return rta;
   }
 
   async findOne(id) {
     const tipo = await this.findByPk(id);
     if(!tipo) {
-      throw boom.notFound('TipoTransaccion not found');
+      throw boom.notFound('Tipo chequera not found');
     }
     return tipo;
   }
@@ -35,4 +35,4 @@ class TipoTipoTransaccionService {
   }
 }
 
-module.exports = TipoTipoTransaccionService;
+module.exports = TipoChequeraService;

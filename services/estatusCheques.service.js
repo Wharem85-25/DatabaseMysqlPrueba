@@ -1,33 +1,38 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
 
-class OrderService {
+class estatusChequesService {
+  constructor() {}
 
-  constructor(){
-  }
   async create(data) {
-    return data;
+    const estatus = await models.EstatusCheques.create(data);
+    return estatus;
   }
 
   async find() {
-    return [];
+    const rta = await models.EstatusCheques.findAll();
+    return rta;
   }
 
   async findOne(id) {
-    return { id };
+    const estatus = await this.findByPk(id);
+    if(!estatus) {
+      throw boom.notFound('Estatus not found');
+    }
+    return estatus;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    };
+    const estatus = await this.findOne(id);
+    const rta = await estatus.updtate(changes);
+    return rta;
   }
 
   async delete(id) {
+    const estatus = await this.findOne(id);
+    await estatus.destroy();
     return { id };
   }
-
 }
 
-module.exports = OrderService;
+module.exports = estatusChequesService;

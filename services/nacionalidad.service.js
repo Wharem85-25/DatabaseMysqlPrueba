@@ -1,33 +1,38 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
 
-class OrderService {
+class NacionalidadService {
+  constructor() {}
 
-  constructor(){
-  }
   async create(data) {
-    return data;
+    const newNacionalidad = await models.Nacionalidad.create(data);
+    return newNacionalidad;
   }
 
   async find() {
-    return [];
+    const rta = await models.Nacionalidad.findAll();
+    return rta;
   }
 
   async findOne(id) {
-    return { id };
+    const nacionalidad = await this.findByPk(id);
+    if(!nacionalidad) {
+      throw boom.notFound('Nacionalidad not found');
+    }
+    return nacionalidad;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
-    };
+    const nacionalidad = await this.findOne(id);
+    const rta = await nacionalidad.updtate(changes);
+    return rta;
   }
 
   async delete(id) {
+    const nacionalidad = await this.findOne(id);
+    await nacionalidad.destroy();
     return { id };
   }
-
 }
 
-module.exports = OrderService;
+module.exports = NacionalidadService;

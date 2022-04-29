@@ -1,6 +1,5 @@
 const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
-// const getConnection = require('../libs/postgres');
 
 class CodigoTransaccionService {
   constructor() {}
@@ -11,7 +10,9 @@ class CodigoTransaccionService {
   }
 
   async find() {
-    const rta = await models.CodigoTransaccion.findAll();
+    const rta = await models.CodigoTransaccion.findAll({
+      include: ['transaccion']
+    });
     return rta;
   }
 
