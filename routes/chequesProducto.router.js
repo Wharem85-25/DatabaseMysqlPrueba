@@ -17,12 +17,11 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getChequesProductoSchema, 'params'),
-  validatorHandler(updateChequesProductoSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
-    const chequesProducto = await service.findOne(id);
-    res.json(chequesProducto);
+    const cheques = await service.findOne(id);
+    res.json(cheques);
   } catch (error) {
     next(error);
   }
@@ -43,11 +42,13 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getChequesProductoSchema, 'params'),
+  validatorHandler(updateChequesProductoSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const cheques = await service.update(id, body);
+      res.json(cheques);
     } catch (error) {
       next(error);
     }

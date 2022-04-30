@@ -1,14 +1,14 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const nombre = Joi.string();
 
 const createTipoChequeraSchema = Joi.object({
-  nombre: nombre.required(),
+  tipo: nombre.required(),
 });
 
 const updateTipoChequeraSchema = Joi.object({
-  nombre: nombre,
+  tipo: nombre,
 });
 
 const getTipoChequeraSchema = Joi.object({

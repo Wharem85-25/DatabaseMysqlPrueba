@@ -20,13 +20,12 @@ const ChequesProductoSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
-    defaultValie: Sequelize.NOW,
+    defaultValue: Sequelize.NOW,
   },
   chequeraId: {
     field: 'chequera_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: CHEQUERA_TABLE,
       key: 'id',
@@ -38,7 +37,6 @@ const ChequesProductoSchema = {
     field: 'tipo_chequera_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: TIPO_CHEQUERA_TABLE,
       key: 'id',
@@ -50,7 +48,6 @@ const ChequesProductoSchema = {
     field: 'producto_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: PRODUCTO_TABLE,
       key: 'id',

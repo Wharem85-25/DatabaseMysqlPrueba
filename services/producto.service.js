@@ -5,9 +5,7 @@ class ProductoService {
   constructor() {}
 
   async create(data) {
-    const newProducto = await models.Producto.create(data, {
-      include: ['moneda']
-    });
+    const newProducto = await models.Producto.create(data);
     return newProducto
   }
 
@@ -19,9 +17,11 @@ class ProductoService {
   }
 
   async findOne(id) {
-    const producto = await models.Producto.findByPk(id);
+    const producto = await models.Producto.findByPk(id, {
+      include: ['moneda']
+    });
     if(!producto) {
-      throw new boom.NotFound('Producto not found');
+      throw new boom.notFound('Producto not found');
     }
     return producto;
   }

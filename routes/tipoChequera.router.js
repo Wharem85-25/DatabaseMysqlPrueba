@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getTipoChequeraSchema, 'params'),
-  validatorHandler(updateTipoChequeraSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -43,11 +42,13 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getTipoChequeraSchema, 'params'),
+  validatorHandler(updateTipoChequeraSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const tipo = await service.update(id, body);
+      res.json(tipo);
     } catch (error) {
       next(error);
     }

@@ -5,9 +5,7 @@ class ClienteService {
   constructor() {}
 
   async create(data) {
-    const newCliente = await models.Cliente.create(data, {
-      include: ['nacionalidad']
-    });
+    const newCliente = await models.Cliente.create(data);
     return newCliente;
   }
 
@@ -19,7 +17,9 @@ class ClienteService {
   }
 
   async findOne(id) {
-    const cliente = await models.Cliente.findByPk(id);
+    const cliente = await models.Cliente.findByPk(id, {
+      include: ['nacionalidad']
+    });
     if(!cliente) {
       throw boom.notFound('Cliente not found');
     }

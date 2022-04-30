@@ -17,12 +17,11 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getClienteSchema, 'params'),
-  validatorHandler(updateClienteSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
-    const clientes = await service.findOne(id);
-    res.json(clientes);
+    const cliente = await service.findOne(id);
+    res.json(cliente);
   } catch (error) {
     next(error);
   }
@@ -43,11 +42,13 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getClienteSchema, 'params'),
+  validatorHandler(updateClienteSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const cliente = await service.update(id, body);
+      res.json(cliente);
     } catch (error) {
       next(error);
     }

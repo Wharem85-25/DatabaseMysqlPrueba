@@ -35,11 +35,10 @@ const TransaccionSchema = {
     field: 'create_at',
     defaultValue: Sequelize.NOW,
   },
-  codigoTransId: {
+  codigoTransaccionId: {
     field: 'codigo_transaccion_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: CODIGO_TRANSACCION_TABLE,
       key: 'id'
@@ -51,7 +50,6 @@ const TransaccionSchema = {
     field: 'cuenta_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: CUENTA_TABLE,
       key: 'id'
@@ -63,7 +61,6 @@ const TransaccionSchema = {
     field: 'origen_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: ORIGEN_TABLE,
       key: 'id'
@@ -75,7 +72,6 @@ const TransaccionSchema = {
     field: 'tipo_transaccion_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: TIPO_TRANSACCION_TABLE,
       key: 'id'
@@ -96,7 +92,6 @@ class Transaccion extends Model {
     this.belongsTo(models.TipoTransaccion, {
       as: 'tipoTransaccion'
     })
-    console.log('hola')
     this.belongsTo(models.CodigoTransaccion, {
       as: 'codigoTransaccion'
     })

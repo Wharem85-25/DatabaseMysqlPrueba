@@ -1,26 +1,23 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const nombre = Joi.string();
 const tasa_interes = Joi.number().precision(2);
-const maneja_cheques = Joi.boolean();
-const moneda = Joi.string();
-const moneda_id = Joi.number().integer();
+const maneja_datos = Joi.boolean();
+const monedaId = Joi.number().integer();
 
 const createProductoSchema = Joi.object({
   nombre: nombre.required(),
   tasa_interes: tasa_interes.required(),
-  maneja_cheques: maneja_cheques.required(),
-  moneda: {
-    moneda: moneda.required(),
-  }
+  maneja_datos: maneja_datos.required(),
+  monedaId: monedaId.required()
 });
 
 const updateProductoSchema = Joi.object({
   nombre: nombre,
   tasa_interes: tasa_interes,
-  maneja_cheque: maneja_cheques,
-  moneda_id: moneda_id
+  maneja_datos: maneja_datos,
+  monedaId: monedaId
 });
 
 const getProductoSchema = Joi.object({

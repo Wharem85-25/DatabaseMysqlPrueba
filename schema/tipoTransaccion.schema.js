@@ -1,14 +1,14 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
-const nombre = Joi.string();
+const id = Joi.number().integer();
+const tipo = Joi.string();
 
 const createTipoTransaccionSchema = Joi.object({
-  nombre: nombre.required(),
+  tipo: tipo.required(),
 });
 
 const updateTipoTransaccionSchema = Joi.object({
-  nombre: nombre,
+  tipo: tipo,
 });
 
 const getTipoTransaccionSchema = Joi.object({

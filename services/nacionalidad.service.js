@@ -15,7 +15,7 @@ class NacionalidadService {
   }
 
   async findOne(id) {
-    const nacionalidad = await this.findByPk(id);
+    const nacionalidad = await models.Nacionalidad.findByPk(id);
     if(!nacionalidad) {
       throw boom.notFound('Nacionalidad not found');
     }
@@ -24,7 +24,7 @@ class NacionalidadService {
 
   async update(id, changes) {
     const nacionalidad = await this.findOne(id);
-    const rta = await nacionalidad.updtate(changes);
+    const rta = await nacionalidad.update(changes);
     return rta;
   }
 

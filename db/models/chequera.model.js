@@ -34,7 +34,6 @@ const ChequeraSchema = {
     field: 'cliente_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model:  CLIENTE_TABLE,
       key: 'id'
@@ -46,7 +45,6 @@ const ChequeraSchema = {
     field: 'estatus_cheques_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: ESTATUS_CHEQUES_TABLE,
       key: 'id',
@@ -58,7 +56,6 @@ const ChequeraSchema = {
     field: 'cuenta_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: CUENTA_TABLE,
       key: 'id',
@@ -80,9 +77,8 @@ class Chequera extends Model {
       as: 'chequesProducto',
       foreignKey: 'chequeraId'
     });
-    console.log('hola')
     this.belongsTo(models.EstatusCheques, {
-      as: 'estatusCheques'
+      as: 'EstatusChequera'
     })
   }
 

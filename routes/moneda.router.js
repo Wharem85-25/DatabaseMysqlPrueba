@@ -17,17 +17,16 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getMonedaSchema, 'params'),
-  validatorHandler(updateMonedaSchema, 'body'),
   async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const moneda = await service.findOne(id);
-    res.json(moneda);
-  } catch (error) {
-    next(error);
+    try {
+      const { id } = req.params;
+      const moneda = await service.findOne(id);
+      res.json(moneda);
+    } catch (error) {
+      next(error);
+    }
   }
-});
-
+);
 
 router.post('/',
   validatorHandler(createMonedaSchema, 'body'),
@@ -43,15 +42,18 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getMonedaSchema, 'params'),
+  validatorHandler(updateMonedaSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const moneda = await service.update(id, body);
+      res.json(moneda);
     } catch (error) {
       next(error);
     }
-  })
+  }
+);
 
 router.delete('/:id',
   validatorHandler(getMonedaSchema, 'params'),

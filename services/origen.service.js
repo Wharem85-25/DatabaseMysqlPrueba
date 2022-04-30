@@ -15,7 +15,7 @@ class OrigenService {
   }
 
   async findOne(id) {
-    const origen = await this.findByPk(id);
+    const origen = await models.Origen.findByPk(id);
     if(!origen) {
       throw boom.notFound('Origen not found');
     }
@@ -24,7 +24,7 @@ class OrigenService {
 
   async update(id, changes) {
     const origen = await this.findOne(id);
-    const rta = await origen.updtate(changes);
+    const rta = await origen.update(changes);
     return rta;
   }
 

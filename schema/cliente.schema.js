@@ -1,13 +1,12 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const nombre = Joi.string();
 const fecha_nacimiento = Joi.date();
 const actividad_economica = Joi.string();
 const ingresos_mensuales = Joi.number().precision(2);
 const dpi = Joi.number().integer();
-const nacionalidad = Joi.string();
-const nacionalidad_id = Joi.number().integer();
+const nacionalidadId = Joi.number().integer();
 
 const createClienteSchema = Joi.object({
   nombre: nombre.required(),
@@ -15,9 +14,7 @@ const createClienteSchema = Joi.object({
   actividad_economica: actividad_economica.required(),
   ingresos_mensuales: ingresos_mensuales.required(),
   dpi: dpi.required(),
-  nacionalidad: {
-    nacionalidad: nacionalidad.required(),
-  }
+  nacionalidadId: nacionalidadId.required(),
 });
 
 const updateClienteSchema = Joi.object({
@@ -26,7 +23,7 @@ const updateClienteSchema = Joi.object({
   actividad_economica: actividad_economica,
   ingresos_mensuales: ingresos_mensuales,
   dpi: dpi,
-  nacionalidad_id: nacionalidad_id
+  nacionalidadId: nacionalidadId
 });
 
 const getClienteSchema = Joi.object({

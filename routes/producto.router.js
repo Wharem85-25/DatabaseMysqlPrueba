@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getProductoSchema, 'params'),
-  validatorHandler(updateProductoSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -43,11 +42,13 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getProductoSchema, 'params'),
+  validatorHandler(updateProductoSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const producto = await service.update(id, body);
+      res.json(producto);
     } catch (error) {
       next(error);
     }

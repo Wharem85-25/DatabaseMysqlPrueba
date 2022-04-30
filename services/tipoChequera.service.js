@@ -15,7 +15,7 @@ class TipoChequeraService {
   }
 
   async findOne(id) {
-    const tipo = await this.findByPk(id);
+    const tipo = await models.TipoChequera.findByPk(id);
     if(!tipo) {
       throw boom.notFound('Tipo chequera not found');
     }
@@ -24,7 +24,7 @@ class TipoChequeraService {
 
   async update(id, changes) {
     const tipo = await this.findOne(id);
-    const rta = await tipo.updtate(changes);
+    const rta = await tipo.update(changes);
     return rta;
   }
 

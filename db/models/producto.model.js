@@ -32,7 +32,6 @@ const ProductoSchema = {
     field: 'moneda_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: MONEDA_TABLE,
       key: 'id',

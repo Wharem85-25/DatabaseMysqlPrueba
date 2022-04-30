@@ -1,15 +1,15 @@
 const express = require('express');
-const CodigoTransaccion = require('../services/codigoTransaccion.service');
+const CodigoTransaccionService = require('../services/codigoTransaccion.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const { createCodigoTransaccionSchema, updateCodigoTransaccionSchema, getCodigoTransaccionSchema } = require('../schema/codigoTransaccion.schema');
 
 const router = express.Router();
-const service = new CodigoTransaccion();
+const service = new CodigoTransaccionService();
 
 router.get('/', async (req, res, next) => {
   try {
-    const codigoTrans = await service.find();
-    res.json(codigoTrans);
+    const codigo = await service.find();
+    res.json(codigo);
   } catch (error) {
     next(error);
   }
@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getCodigoTransaccionSchema, 'params'),
-  validatorHandler(updateCodigoTransaccionSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -43,15 +42,18 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getCodigoTransaccionSchema, 'params'),
+  validatorHandler(updateCodigoTransaccionSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const codigo = await service.update(id, body);
+      res.json(codigo);
     } catch (error) {
       next(error);
     }
   })
+
 
 router.delete('/:id',
   validatorHandler(getCodigoTransaccionSchema, 'params'),

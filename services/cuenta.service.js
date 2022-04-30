@@ -5,9 +5,7 @@ class CuentaService {
   constructor() {}
 
   async create(data) {
-    const newCuenta = await models.Cuenta.create(data, {
-      include: ['cliente']
-    });
+    const newCuenta = await models.Cuenta.create(data);
     return newCuenta;
   }
 
@@ -19,7 +17,9 @@ class CuentaService {
   }
 
   async findOne(id) {
-    const cuenta = await this.findByPk(id);
+    const cuenta = await models.Cuenta.findByPk(id, {
+      include: ['cliente', 'producto']
+    });
     if(!cuenta) {
       throw boom.notFound('Cuenta not found');
     }
@@ -28,7 +28,7 @@ class CuentaService {
 
   async update(id, changes) {
     const cuenta = await this.findOne(id);
-    const rta = await cuenta.updtate(changes);
+    const rta = await cuenta.update(changes);
     return rta;
   }
 

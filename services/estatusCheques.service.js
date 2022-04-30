@@ -15,7 +15,7 @@ class estatusChequesService {
   }
 
   async findOne(id) {
-    const estatus = await this.findByPk(id);
+    const estatus = await models.EstatusCheques.findByPk(id);
     if(!estatus) {
       throw boom.notFound('Estatus not found');
     }
@@ -24,7 +24,7 @@ class estatusChequesService {
 
   async update(id, changes) {
     const estatus = await this.findOne(id);
-    const rta = await estatus.updtate(changes);
+    const rta = await estatus.update(changes);
     return rta;
   }
 

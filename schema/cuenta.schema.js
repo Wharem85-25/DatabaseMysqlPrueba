@@ -1,32 +1,26 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const saldo = Joi.number().precision(2);
-const interersGanado = Joi.number().precision(2);
+const interesGanado = Joi.number().precision(2);
 const montoReserva = Joi.number().precision(2);
-const cliente = Joi.string();
-const cliente_id = Joi.number().integer();
-const producto = Joi.string();
-const producto_id = Joi.number().integer();
+const clienteId = Joi.number().integer();
+const productoId = Joi.number().integer();
 
 const createCuentaSchema = Joi.object({
   saldo: saldo.required(),
-  interersGanado: interersGanado.required(),
+  interesGanado: interesGanado.required(),
   montoReserva: montoReserva.required(),
-  cliente: {
-    nombre: cliente.required()
-  },
-  producto: {
-    nombre: producto.required(),
-  }
+  clienteId: clienteId.required(),
+  productoId: productoId.required(),
 });
 
 const updateCuentaSchema = Joi.object({
   saldo: saldo,
-  interersGanado: interersGanado,
+  interesGanado: interesGanado,
   montoReserva: montoReserva,
-  cliente_id: cliente_id,
-  producto_id: producto_id
+  clienteId: clienteId,
+  productoId: productoId
 });
 
 const getCuentaSchema = Joi.object({

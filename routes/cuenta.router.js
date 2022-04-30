@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id',
   validatorHandler(getCuentaSchema, 'params'),
-  validatorHandler(updateCuentaSchema, 'body'),
   async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -27,7 +26,6 @@ router.get('/:id',
     next(error);
   }
 });
-
 
 router.post('/',
   validatorHandler(createCuentaSchema, 'body'),
@@ -43,11 +41,13 @@ router.post('/',
 
 router.patch('/:id',
   validatorHandler(getCuentaSchema, 'params'),
+  validatorHandler(updateCuentaSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      await service.delete(id);
-      res.status(201).json({id});
+      const body = req.body;
+      const cuenta = await service.update(id, body);
+      res.json(cuenta);
     } catch (error) {
       next(error);
     }

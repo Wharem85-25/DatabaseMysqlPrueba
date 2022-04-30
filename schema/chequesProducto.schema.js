@@ -1,20 +1,23 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const cantidad = Joi.number().precision(2);
-const nombre = Joi.string();
-const tipo_chequera_id = Joi.number().integer();
+const chequeraId = Joi.number().integer();
+const productoId = Joi.number().integer();
+const tipoChequeraId = Joi.number().integer();
 
 const createChequesProductoSchema = Joi.object({
   cantidad: cantidad.required(),
-  tipo_chequera: {
-    nombre: nombre.required(),
-  }
+  chequeraId: chequeraId.required(),
+  productoId: productoId.required(),
+  tipoChequeraId: tipoChequeraId.required()
 })
 
 const updateChequesProductoSchema = Joi.object({
   cantidad: cantidad,
-  tipo_chequera_id: tipo_chequera_id
+  chequeraId: chequeraId,
+  productoId: productoId,
+  tipoChequeraId: tipoChequeraId
 })
 
 const getChequesProductoSchema = Joi.object({

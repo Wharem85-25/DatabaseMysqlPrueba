@@ -33,14 +33,14 @@ function setupModels(sequelize) {
   ChequesProducto.associate(sequelize.models);
   CodigoTransaccion.associate(sequelize.models);
   Moneda.associate(sequelize.models);
-  EstatusCheques.associate(sequelize.models);
   Nacionalidad.associate(sequelize.models);
   Origen.associate(sequelize.models);
   Cuenta.associate(sequelize.models);
   TipoChequera.associate(sequelize.models);
+  EstatusCheques.associate(sequelize.models);
   Chequera.associate(sequelize.models);
-  TipoTransaccion.associate(sequelize.models);
   Transaccion.associate(sequelize.models);
+  TipoTransaccion.associate(sequelize.models);
 }
 
 module.exports = setupModels;

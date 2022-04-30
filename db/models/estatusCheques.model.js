@@ -10,7 +10,7 @@ const EstatusChequesSchema = {
   },
   estatus: {
     allowNull: false,
-    type: DataTypes.BOOLEAN
+    type: DataTypes.STRING
   },
   createAt: {
     allowNull: false,
@@ -32,7 +32,7 @@ class EstatusCheques extends Model {
     return {
       sequelize,
       tableName: ESTATUS_CHEQUES_TABLE,
-      modelName: 'estatus_chequera',
+      modelName: 'EstatusCheques',
       timestamps: false,
     }
   }

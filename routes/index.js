@@ -16,10 +16,10 @@ const chequesProductoRouter = require('./chequesProducto.router');
 
 function routerApi(app) {
   const router = express.Router();
-  app.use('/api/v1', router);
+  app.use('/api/v2', router);
   router.use('/cliente', clienteRouter);
   router.use('/producto', productosRouter);
-  router.use('chequera', chequeraRouter);
+  router.use('/chequera', chequeraRouter);
   router.use('/transacciones', transaccionesRouter);
   router.use('/codigoTransaccion', codigoTransaccionRouter);
   router.use('/estatusCheques', estatusChequesRouter);
@@ -27,9 +27,9 @@ function routerApi(app) {
   router.use('/nacionalidad', nacionalidadRouter);
   router.use('/origen', origenRouter);
   router.use('/tipoTransaccion', tipoTransaccionRouter);
-  router.use('/origen', tipoChequeraRouter);
-  router.use('/origen', cuentaRouter);
-  router.use('/origen', chequesProductoRouter);
+  router.use('/tipoChequera', tipoChequeraRouter);
+  router.use('/cuenta', cuentaRouter);
+  router.use('/chequesProducto', chequesProductoRouter);
 }
 
 module.exports = routerApi;

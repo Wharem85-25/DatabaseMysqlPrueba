@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const nombre = Joi.string();
 
 const createMonedaSchema = Joi.object({

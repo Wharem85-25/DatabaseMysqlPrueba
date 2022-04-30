@@ -28,7 +28,6 @@ const CodigoTransSchema = {
     field: 'tipo_transaccion_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: TIPO_TRANSACCION_TABLE,
       key: 'id'
@@ -42,7 +41,7 @@ class CodigoTransaccion extends Model {
   static associate(models) {
     this.hasOne(models.Transaccion, {
       as: 'transaccion',
-      foreignKey: 'codigoTransId'
+      foreignKey: 'codigoTransaccionId'
     })
     this.belongsTo(models.TipoTransaccion, {
       as: 'tipoTransaccion',
@@ -53,7 +52,7 @@ class CodigoTransaccion extends Model {
     return {
       sequelize,
       tableName: CODIGO_TRANSACCION_TABLE,
-      modelName: 'Codigo_transaccion',
+      modelName: 'CodigoTransaccion',
       timestamps: false,
     }
   }

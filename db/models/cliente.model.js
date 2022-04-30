@@ -14,7 +14,7 @@ const ClienteSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  fecha_nacimientp: {
+  fecha_nacimiento: {
     allowNull: false,
     type: DataTypes.DATE,
   },
@@ -41,7 +41,6 @@ const ClienteSchema = {
     field: 'nacionalidad_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: NACIONALIDAD_TABLE,
       key: 'id'

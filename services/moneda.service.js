@@ -15,7 +15,7 @@ class MonedaService {
   }
 
   async findOne(id) {
-    const moneda = await this.findByPk(id);
+    const moneda = await models.Moneda.findByPk(id);
     if(!moneda) {
       throw boom.notFound('Moneda not found');
     }
@@ -24,7 +24,7 @@ class MonedaService {
 
   async update(id, changes) {
     const moneda = await this.findOne(id);
-    const rta = await moneda.updtate(changes);
+    const rta = await moneda.update(changes);
     return rta;
   }
 

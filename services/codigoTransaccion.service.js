@@ -11,13 +11,15 @@ class CodigoTransaccionService {
 
   async find() {
     const rta = await models.CodigoTransaccion.findAll({
-      include: ['transaccion']
+      include: ['tipoTransaccion']
     });
     return rta;
   }
 
   async findOne(id) {
-    const codigoTrans = await models.CodigoTransaccion.findByPk(id);
+    const codigoTrans = await models.CodigoTransaccion.findByPk(id, {
+      include: ['tipoTransaccion']
+    });
     if(!codigoTrans) {
       throw boom.notFound('codigo transaccion not found');
     }

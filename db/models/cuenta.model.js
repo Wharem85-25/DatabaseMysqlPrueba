@@ -33,7 +33,6 @@ const CuentaSchema = {
     field: 'cliente_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: CLIENTE_TABLE,
       key: 'id'
@@ -45,7 +44,6 @@ const CuentaSchema = {
     field: 'producto_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
       model: PRODUCTO_TABLE,
       key: 'id',

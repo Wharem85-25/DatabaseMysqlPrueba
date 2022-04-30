@@ -15,7 +15,7 @@ class TipoTipoTransaccionService {
   }
 
   async findOne(id) {
-    const tipo = await this.findByPk(id);
+    const tipo = await models.TipoTransaccion.findByPk(id);
     if(!tipo) {
       throw boom.notFound('TipoTransaccion not found');
     }
@@ -24,7 +24,7 @@ class TipoTipoTransaccionService {
 
   async update(id, changes) {
     const tipo = await this.findOne(id);
-    const rta = await tipo.updtate(changes);
+    const rta = await tipo.update(changes);
     return rta;
   }
 

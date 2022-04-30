@@ -5,23 +5,23 @@ class ChequesProductoService {
 constructor() {}
 
   async create(data) {
-    const newChequera = await models.ChequesProducto.create(data, {
-      include: ['tipo_chequera']
-    });
+    const newChequera = await models.ChequesProducto.create(data);
     return newChequera;
   }
 
   async find() {
     const rta = await models.ChequesProducto.findAll({
-      include: ['tipo_chequera']
+      include: ['tipoChequera', 'chequera', 'producto']
     });
     return rta;
   }
 
   async findOne(id) {
-    const chequera = await models.ChequesProducto.findByPk(id);
+    const chequera = await models.ChequesProducto.findByPk(id, {
+      include: ['tipoChequera', 'chequera', 'producto']
+    });
     if(!chequera) {
-      throw boom.notFount('Cheques producto not found');
+      throw new boom.notFound('Producto not found');
     }
     return chequera;
   }

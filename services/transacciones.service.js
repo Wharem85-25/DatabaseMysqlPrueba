@@ -5,21 +5,21 @@ class TransaccionService {
   constructor() {}
 
   async create(data) {
-    const newTrans = await models.Transaccion.create(data, {
-      include: ['codigoTransaccion']
-    });
+    const newTrans = await models.Transaccion.create(data);
     return newTrans;
   }
 
   async find() {
     const rta = await models.Transaccion.findAll({
-      include: ['codigo_transaccion', 'origen', 'tipo_transaccion']
+      include: ['codigoTransaccion', 'origen', 'tipoTransaccion', 'cuenta']
     });
     return rta;
   }
 
   async findOne(id) {
-    const trans = await this.findByPk(id);
+    const trans = await models.Transaccion.findByPk(id, {
+      include: ['codigoTransaccion', 'origen', 'tipoTransaccion', 'cuenta']
+    });
     if(!trans) {
       throw boom.notFound('transaccion not found');
     }
@@ -28,7 +28,7 @@ class TransaccionService {
 
   async update(id, changes) {
     const trans = await this.findOne(id);
-    const rta = await trans.updtate(changes);
+    const rta = await trans.update(changes);
     return rta;
   }
 

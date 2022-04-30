@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
+const id = Joi.number().integer();
 const tipo = Joi.string();
 
 const createOrigenSchema = Joi.object({

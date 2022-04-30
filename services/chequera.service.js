@@ -5,16 +5,12 @@ class ChequeraService {
   constructor() {}
 
   async create(data) {
-    const newChequera = await models.Chequera.create(data, {
-      include: ['estatus_cheques']
-    });
+    const newChequera = await models.Chequera.create(data);
     return newChequera;
   }
 
   async find() {
-    const rta = await models.Chequera.findAll({
-      include: ['estatus_cheques']
-    });
+    const rta = await models.Chequera.findAll();
     return rta;
   }
 
