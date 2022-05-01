@@ -10,15 +10,18 @@ constructor() {}
   }
 
   async find() {
-    const rta = await models.ChequesProducto.findAll({
-      include: ['tipoChequera', 'chequera', 'producto']
-    });
+    const rta = await models.ChequesProducto.findAll();
     return rta;
+  }
+
+  async getColumnsName() {
+    const rta = await models.ChequesProducto.rawAttributes;
+    return Object.keys(rta);
   }
 
   async findOne(id) {
     const chequera = await models.ChequesProducto.findByPk(id, {
-      include: ['tipoChequera', 'chequera', 'producto']
+      include: ['producto'],
     });
     if(!chequera) {
       throw new boom.notFound('Producto not found');

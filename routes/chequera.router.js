@@ -15,6 +15,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/columnsName', async (req, res, next) => {
+  try {
+    const chequeras = await service.getColumnsName();
+    res.json(chequeras);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id',
   validatorHandler(getChequeraSchema, 'params'),
   async (req, res, next) => {

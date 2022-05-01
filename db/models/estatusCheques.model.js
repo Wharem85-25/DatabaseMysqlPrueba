@@ -23,7 +23,7 @@ const EstatusChequesSchema = {
 class EstatusCheques extends Model {
   static associate(models) {
     this.hasMany(models.Chequera, {
-      as: 'chequera',
+      as: 'Chequera',
       foreignKey: 'estatusChequesId'
     });
   }

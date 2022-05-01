@@ -10,10 +10,13 @@ class ClienteService {
   }
 
   async find() {
-    const rta = await models.Cliente.findAll({
-      include: ['nacionalidad']
-    });
+    const rta = await models.Cliente.findAll();
     return rta;
+  }
+
+  async getColumnsName() {
+    const rta = await models.Cliente.rawAttributes;
+    return Object.keys(rta);
   }
 
   async findOne(id) {

@@ -10,10 +10,13 @@ class CodigoTransaccionService {
   }
 
   async find() {
-    const rta = await models.CodigoTransaccion.findAll({
-      include: ['tipoTransaccion']
-    });
+    const rta = await models.CodigoTransaccion.findAll();
     return rta;
+  }
+
+  async getColumnsName() {
+    const rta = await models.CodigoTransaccion.rawAttributes;
+    return Object.keys(rta);
   }
 
   async findOne(id) {

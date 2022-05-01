@@ -14,6 +14,11 @@ class ChequeraService {
     return rta;
   }
 
+  async getColumnsName() {
+    const rta = await models.Chequera.rawAttributes;
+    return Object.keys(rta);
+  }
+
   async findOne(id) {
     const chequera = await models.Chequera.findByPk(id);
     if(!chequera) {

@@ -15,6 +15,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/columnsName', async (req, res, next) => {
+  try {
+    const codigo = await service.getColumnsName();
+    res.json(codigo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id',
   validatorHandler(getCodigoTransaccionSchema, 'params'),
   async (req, res, next) => {

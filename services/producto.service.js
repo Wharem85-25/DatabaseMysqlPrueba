@@ -10,10 +10,13 @@ class ProductoService {
   }
 
   async find() {
-    const rta = await models.Producto.findAll({
-      include: ['moneda']
-    });
+    const rta = await models.Producto.findAll();
     return rta;
+  }
+
+  async getColumnsName() {
+    const rta = await models.Producto.rawAttributes;
+    return Object.keys(rta);
   }
 
   async findOne(id) {

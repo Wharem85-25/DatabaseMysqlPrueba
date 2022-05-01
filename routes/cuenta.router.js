@@ -15,6 +15,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/columnsName', async (req, res, next) => {
+  try {
+    const cuenta = await service.getColumnsName();
+    res.json(cuenta);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id',
   validatorHandler(getCuentaSchema, 'params'),
   async (req, res, next) => {

@@ -10,10 +10,13 @@ class CuentaService {
   }
 
   async find() {
-    const rta = await models.Cuenta.findAll({
-      include: ['cliente', 'producto']
-    });
+    const rta = await models.Cuenta.findAll();
     return rta;
+  }
+
+  async getColumnsName() {
+    const rta = await models.Cuenta.rawAttributes;
+    return Object.keys(rta);
   }
 
   async findOne(id) {

@@ -78,7 +78,7 @@ class Chequera extends Model {
       foreignKey: 'chequeraId'
     });
     this.belongsTo(models.EstatusCheques, {
-      as: 'EstatusChequera'
+      as: 'estatusCheques'
     })
   }
 
