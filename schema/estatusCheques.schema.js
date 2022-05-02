@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const estatus = Joi.boolean();
+const estatus = Joi.string();
 
 const createEstatusChequeraSchema = Joi.object({
   estatus: estatus.required(),
